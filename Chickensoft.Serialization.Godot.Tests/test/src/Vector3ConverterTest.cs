@@ -16,6 +16,8 @@ public class Vector3ConverterTest : TestClass {
 
   [Test]
   public void Converts() {
+    GodotSerialization.Setup();
+
     var options = new JsonSerializerOptions() {
       WriteIndented = true,
       TypeInfoResolver = new SerializableTypeResolver(),

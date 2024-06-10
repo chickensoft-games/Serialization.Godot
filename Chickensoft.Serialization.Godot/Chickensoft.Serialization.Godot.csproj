@@ -49,6 +49,5 @@
     </PackageReference>
     <PackageReference Include="GodotSharp" Version="4.2.2" />
     <PackageReference Include="Chickensoft.Serialization" Version="1.1.0" />
-    <PackageReference Include="PolyKit" Version="3.0.9" />
   </ItemGroup>
 </Project>

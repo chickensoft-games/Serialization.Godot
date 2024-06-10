@@ -10,6 +10,12 @@ Please contribute! This only supports the following types:
 - ✅ `Basis`
 - ✅ `Transform3D`
 
+Be sure to place the following line somewhere before you start serializing/deserializing:
+
+```csharp
+GodotSerialization.Setup();
+```
+
 ---
 
 <p align="center">

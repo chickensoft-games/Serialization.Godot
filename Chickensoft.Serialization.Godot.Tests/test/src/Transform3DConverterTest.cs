@@ -16,6 +16,8 @@ public class Transform3DConverterTest : TestClass {
 
   [Test]
   public void Converts() {
+    GodotSerialization.Setup();
+
     var options = new JsonSerializerOptions() {
       WriteIndented = true,
       TypeInfoResolver = new SerializableTypeResolver(),
