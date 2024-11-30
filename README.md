@@ -13,6 +13,7 @@ Please contribute! This only supports the following types:
 - ✅ `Vector3i`
 - ✅ `Basis`
 - ✅ `Transform3D`
+- ✅ `Color`
 
 Be sure to place the following line somewhere before you start serializing/deserializing:
 
