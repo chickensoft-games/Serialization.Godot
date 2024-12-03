@@ -1,13 +1,22 @@
 namespace Chickensoft.Serialization.Godot;
 
 using System;
-using System.Globalization;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using System.Text.RegularExpressions;
 using global::Godot;
 
 /// <summary>Color JSON converter.</summary>
-public class ColorConverter : JsonConverter<Color> {
+public partial class ColorConverter : JsonConverter<Color> {
+  [GeneratedRegex("\\s*rgba\\((.*)\\)\\s*", RegexOptions.IgnoreCase, "en-US")]
+  private static partial Regex RgbaRegex();
+
+  [GeneratedRegex("\\s+", RegexOptions.IgnoreCase, "en-US")]
+  private static partial Regex WhitespaceRegex();
+
+  private static readonly Regex _rgbaRegex = RgbaRegex();
+  private static readonly Regex _whitespaceRegex = WhitespaceRegex();
+
   /// <inheritdoc />
   public override bool CanConvert(Type typeToConvert) =>
     typeToConvert == typeof(Color);
@@ -18,11 +27,14 @@ public class ColorConverter : JsonConverter<Color> {
     Type typeToConvert,
     JsonSerializerOptions options
   ) {
-    var rgba = (uint)0x000000ff;
+    var r = 0f;
+    var g = 0f;
+    var b = 0f;
+    var a = 1f;
 
     while (reader.Read()) {
       if (reader.TokenType == JsonTokenType.EndObject) {
-        return new Color(rgba);
+        return new Color(r, g, b, a);
       }
 
       if (reader.TokenType != JsonTokenType.PropertyName) {
@@ -34,7 +46,26 @@ public class ColorConverter : JsonConverter<Color> {
 
       switch (propertyName) {
         case "rgba":
-          rgba = uint.Parse(reader.GetString() ?? string.Empty, NumberStyles.HexNumber);
+          var match = _rgbaRegex.Match(reader.GetString() ?? string.Empty);
+          if (match.Groups[1].Success) {
+            var values = _whitespaceRegex
+              .Replace(match.Groups[1].Value, "")
+              .Split(",");
+
+            if (values.Length == 4) {
+              r = float.Parse(values[0]);
+              g = float.Parse(values[1]);
+              b = float.Parse(values[2]);
+              a = float.Parse(values[3]);
+            }
+            else {
+              throw new JsonException("Unable to parse property 'rgba' of Color");
+            }
+          }
+          else {
+            throw new JsonException("Unable to parse property 'rgba' of Color");
+          }
+
           break;
         default:
           break;
@@ -51,7 +82,7 @@ public class ColorConverter : JsonConverter<Color> {
     JsonSerializerOptions options
   ) {
     writer.WriteStartObject();
-    writer.WriteString("rgba", value.ToRgba32().ToString("X"));
+    writer.WriteString("rgba", $"rgba({value.R}, {value.G}, {value.B}, {value.A})");
     writer.WriteEndObject();
   }
 }
