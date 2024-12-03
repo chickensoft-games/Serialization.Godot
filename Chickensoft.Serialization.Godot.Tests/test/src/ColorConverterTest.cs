@@ -23,17 +23,17 @@ public class ColorConverterTest : TestClass {
       TypeInfoResolver = new SerializableTypeResolver(),
     };
 
-    var obj = new Color(0xff0000ff);
+    var obj = new Color(1f, 0.5f, 0f, 1f);
     var json = JsonSerializer.Serialize(obj, options);
 
     json.ShouldBe(
       /*lang=json*/
       """
       {
-        "rgba": "FF0000FF"
+        "rgba": "rgba(1, 0.5, 0, 1)"
       }
       """
-    );
+    , StringCompareShould.IgnoreLineEndings);
 
     var deserialized = JsonSerializer.Deserialize<Color>(json, options);
 
