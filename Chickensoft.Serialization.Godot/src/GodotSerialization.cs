@@ -19,5 +19,7 @@ public static class GodotSerialization {
     Serializer.AddConverter(new BasisConverter());
     Serializer.AddConverter(new Transform3DConverter());
     Serializer.AddConverter(new ColorConverter());
+    Serializer.AddConverter(new Rect2Converter());
+    Serializer.AddConverter(new Rect2IConverter());
   }
 }
