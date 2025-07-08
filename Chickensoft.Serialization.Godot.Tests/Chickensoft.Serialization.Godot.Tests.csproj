@@ -24,7 +24,7 @@
     <PackageReference Include="LightMock.Generator" Version="1.2.3" />
     <!-- Convenience wrapper around generated mocks. -->
     <PackageReference Include="LightMoq" Version="0.1.0" />
-    <PackageReference Include="System.Text.Json" Version="9.0.6" />
+    <PackageReference Include="System.Text.Json" Version="9.0.7" />
   </ItemGroup>
   <ItemGroup>
     <!-- Include the package to test. -->
