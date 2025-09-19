@@ -1,4 +1,4 @@
-<Project Sdk="Godot.NET.Sdk/4.4.1">
+<Project Sdk="Godot.NET.Sdk/4.5.0">
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>disable</ImplicitUsings>
@@ -24,7 +24,7 @@
     <PackageReference Include="LightMock.Generator" Version="1.2.3" />
     <!-- Convenience wrapper around generated mocks. -->
     <PackageReference Include="LightMoq" Version="0.1.0" />
-    <PackageReference Include="System.Text.Json" Version="9.0.8" />
+    <PackageReference Include="System.Text.Json" Version="9.0.9" />
   </ItemGroup>
   <ItemGroup>
     <!-- Include the package to test. -->
