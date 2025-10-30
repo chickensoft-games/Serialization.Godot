@@ -5,12 +5,14 @@ using Chickensoft.Serialization;
 /// <summary>
 /// Godot serialization.
 /// </summary>
-public static class GodotSerialization {
+public static class GodotSerialization
+{
   /// <summary>
   /// Register the converters for Godot types with the Chickensoft Serialization
   /// system.
   /// </summary>
-  public static void Setup() {
+  public static void Setup()
+  {
     Serializer.AddConverter(new Vector2Converter());
     Serializer.AddConverter(new Vector2IConverter());
     Serializer.AddConverter(new Transform2DConverter());

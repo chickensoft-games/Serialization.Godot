@@ -6,7 +6,8 @@ using System.Text.Json.Serialization;
 using global::Godot;
 
 /// <summary>Vector2I JSON converter.</summary>
-public class Vector2IConverter : JsonConverter<Vector2I> {
+public class Vector2IConverter : JsonConverter<Vector2I>
+{
   /// <inheritdoc />
   public override bool CanConvert(Type typeToConvert) =>
     typeToConvert == typeof(Vector2I);
@@ -16,23 +17,28 @@ public class Vector2IConverter : JsonConverter<Vector2I> {
     ref Utf8JsonReader reader,
     Type typeToConvert,
     JsonSerializerOptions options
-  ) {
+  )
+  {
     var x = 0;
     var y = 0;
 
-    while (reader.Read()) {
-      if (reader.TokenType == JsonTokenType.EndObject) {
+    while (reader.Read())
+    {
+      if (reader.TokenType == JsonTokenType.EndObject)
+      {
         return new Vector2I(x, y);
       }
 
-      if (reader.TokenType != JsonTokenType.PropertyName) {
+      if (reader.TokenType != JsonTokenType.PropertyName)
+      {
         continue;
       }
 
       var propertyName = reader.GetString();
       reader.Read();
 
-      switch (propertyName) {
+      switch (propertyName)
+      {
         case "x":
           x = reader.GetInt32();
           break;
@@ -52,7 +58,8 @@ public class Vector2IConverter : JsonConverter<Vector2I> {
     Utf8JsonWriter writer,
     Vector2I value,
     JsonSerializerOptions options
-  ) {
+  )
+  {
     writer.WriteStartObject();
     writer.WriteNumber("x", value.X);
     writer.WriteNumber("y", value.Y);

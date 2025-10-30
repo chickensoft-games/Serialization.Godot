@@ -6,7 +6,8 @@ using System.Text.Json.Serialization;
 using global::Godot;
 
 /// <summary>Transform3D JSON converter.</summary>
-public class Transform3DConverter : JsonConverter<Transform3D> {
+public class Transform3DConverter : JsonConverter<Transform3D>
+{
   /// <inheritdoc />
   public override bool CanConvert(Type typeToConvert) =>
     typeToConvert == typeof(Transform3D);
@@ -16,23 +17,28 @@ public class Transform3DConverter : JsonConverter<Transform3D> {
     ref Utf8JsonReader reader,
     Type typeToConvert,
     JsonSerializerOptions options
-  ) {
+  )
+  {
     var basis = new Basis();
     var origin = new Vector3();
 
-    while (reader.Read()) {
-      if (reader.TokenType == JsonTokenType.EndObject) {
+    while (reader.Read())
+    {
+      if (reader.TokenType == JsonTokenType.EndObject)
+      {
         return new Transform3D(basis, origin);
       }
 
-      if (reader.TokenType != JsonTokenType.PropertyName) {
+      if (reader.TokenType != JsonTokenType.PropertyName)
+      {
         continue;
       }
 
       var propertyName = reader.GetString();
       reader.Read();
 
-      switch (propertyName) {
+      switch (propertyName)
+      {
         case "basis":
           basis = JsonSerializer.Deserialize<Basis>(ref reader, options);
           break;
@@ -48,7 +54,8 @@ public class Transform3DConverter : JsonConverter<Transform3D> {
   }
 
   /// <inheritdoc />
-  public override void Write(Utf8JsonWriter writer, Transform3D value, JsonSerializerOptions options) {
+  public override void Write(Utf8JsonWriter writer, Transform3D value, JsonSerializerOptions options)
+  {
     var resolver = options.TypeInfoResolver;
     var basisTypeInfo = resolver!.GetTypeInfo(typeof(Basis), options)!;
     var vectorTypeInfo = resolver!.GetTypeInfo(typeof(Vector3), options)!;
