@@ -1,13 +1,15 @@
 namespace Chickensoft.Serialization.Godot;
 
 using System;
+using System.Globalization;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Text.RegularExpressions;
 using global::Godot;
 
 /// <summary>Color JSON converter.</summary>
-public partial class ColorConverter : JsonConverter<Color> {
+public partial class ColorConverter : JsonConverter<Color>
+{
   [GeneratedRegex("\\s*rgba\\((.*)\\)\\s*", RegexOptions.IgnoreCase, "en-US")]
   private static partial Regex RgbaRegex();
 
@@ -26,43 +28,52 @@ public partial class ColorConverter : JsonConverter<Color> {
     ref Utf8JsonReader reader,
     Type typeToConvert,
     JsonSerializerOptions options
-  ) {
+  )
+  {
     var r = 0f;
     var g = 0f;
     var b = 0f;
     var a = 1f;
 
-    while (reader.Read()) {
-      if (reader.TokenType == JsonTokenType.EndObject) {
+    while (reader.Read())
+    {
+      if (reader.TokenType == JsonTokenType.EndObject)
+      {
         return new Color(r, g, b, a);
       }
 
-      if (reader.TokenType != JsonTokenType.PropertyName) {
+      if (reader.TokenType != JsonTokenType.PropertyName)
+      {
         continue;
       }
 
       var propertyName = reader.GetString();
       reader.Read();
 
-      switch (propertyName) {
+      switch (propertyName)
+      {
         case "rgba":
           var match = _rgbaRegex.Match(reader.GetString() ?? string.Empty);
-          if (match.Groups[1].Success) {
+          if (match.Groups[1].Success)
+          {
             var values = _whitespaceRegex
               .Replace(match.Groups[1].Value, "")
               .Split(",");
 
-            if (values.Length == 4) {
-              r = float.Parse(values[0]);
-              g = float.Parse(values[1]);
-              b = float.Parse(values[2]);
-              a = float.Parse(values[3]);
+            if (values.Length == 4)
+            {
+              r = float.Parse(values[0], CultureInfo.InvariantCulture);
+              g = float.Parse(values[1], CultureInfo.InvariantCulture);
+              b = float.Parse(values[2], CultureInfo.InvariantCulture);
+              a = float.Parse(values[3], CultureInfo.InvariantCulture);
             }
-            else {
+            else
+            {
               throw new JsonException("Unable to parse property 'rgba' of Color");
             }
           }
-          else {
+          else
+          {
             throw new JsonException("Unable to parse property 'rgba' of Color");
           }
 
@@ -80,7 +91,8 @@ public partial class ColorConverter : JsonConverter<Color> {
     Utf8JsonWriter writer,
     Color value,
     JsonSerializerOptions options
-  ) {
+  )
+  {
     writer.WriteStartObject();
     writer.WriteString("rgba", $"rgba({value.R}, {value.G}, {value.B}, {value.A})");
     writer.WriteEndObject();

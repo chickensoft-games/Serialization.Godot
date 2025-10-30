@@ -6,7 +6,8 @@ using System.Text.Json.Serialization;
 using global::Godot;
 
 /// <summary>Basis JSON converter.</summary>
-public class BasisConverter : JsonConverter<Basis> {
+public class BasisConverter : JsonConverter<Basis>
+{
   /// <inheritdoc />
   public override bool CanConvert(Type typeToConvert) =>
     typeToConvert == typeof(Basis);
@@ -16,24 +17,29 @@ public class BasisConverter : JsonConverter<Basis> {
     ref Utf8JsonReader reader,
     Type typeToConvert,
     JsonSerializerOptions options
-  ) {
+  )
+  {
     var x = new Vector3();
     var y = new Vector3();
     var z = new Vector3();
 
-    while (reader.Read()) {
-      if (reader.TokenType == JsonTokenType.EndObject) {
+    while (reader.Read())
+    {
+      if (reader.TokenType == JsonTokenType.EndObject)
+      {
         return new Basis(x, y, z);
       }
 
-      if (reader.TokenType != JsonTokenType.PropertyName) {
+      if (reader.TokenType != JsonTokenType.PropertyName)
+      {
         continue;
       }
 
       var propertyName = reader.GetString();
       reader.Read();
 
-      switch (propertyName) {
+      switch (propertyName)
+      {
         case "x":
           x = JsonSerializer.Deserialize<Vector3>(ref reader, options);
           break;
@@ -57,7 +63,8 @@ public class BasisConverter : JsonConverter<Basis> {
     Utf8JsonWriter writer,
     Basis value,
     JsonSerializerOptions options
-  ) {
+  )
+  {
     var resolver = options.TypeInfoResolver;
     var vectorTypeInfo = resolver!.GetTypeInfo(typeof(Vector3), options)!;
 

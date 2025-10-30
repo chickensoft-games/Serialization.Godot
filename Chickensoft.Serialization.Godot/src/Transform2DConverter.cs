@@ -6,7 +6,8 @@ using System.Text.Json.Serialization;
 using global::Godot;
 
 /// <summary>Transform2D JSON converter.</summary>
-public class Transform2DConverter : JsonConverter<Transform2D> {
+public class Transform2DConverter : JsonConverter<Transform2D>
+{
   /// <inheritdoc />
   public override bool CanConvert(Type typeToConvert) =>
     typeToConvert == typeof(Transform2D);
@@ -16,24 +17,29 @@ public class Transform2DConverter : JsonConverter<Transform2D> {
     ref Utf8JsonReader reader,
     Type typeToConvert,
     JsonSerializerOptions options
-  ) {
+  )
+  {
     var x = new Vector2();
     var y = new Vector2();
     var origin = new Vector2();
 
-    while (reader.Read()) {
-      if (reader.TokenType == JsonTokenType.EndObject) {
+    while (reader.Read())
+    {
+      if (reader.TokenType == JsonTokenType.EndObject)
+      {
         return new Transform2D(x, y, origin);
       }
 
-      if (reader.TokenType != JsonTokenType.PropertyName) {
+      if (reader.TokenType != JsonTokenType.PropertyName)
+      {
         continue;
       }
 
       var propertyName = reader.GetString();
       reader.Read();
 
-      switch (propertyName) {
+      switch (propertyName)
+      {
         case "x":
           x = JsonSerializer.Deserialize<Vector2>(ref reader, options);
           break;
@@ -52,7 +58,8 @@ public class Transform2DConverter : JsonConverter<Transform2D> {
   }
 
   /// <inheritdoc />
-  public override void Write(Utf8JsonWriter writer, Transform2D value, JsonSerializerOptions options) {
+  public override void Write(Utf8JsonWriter writer, Transform2D value, JsonSerializerOptions options)
+  {
     var resolver = options.TypeInfoResolver;
     var vectorTypeInfo = resolver!.GetTypeInfo(typeof(Vector2), options)!;
 

@@ -1,24 +1,28 @@
 namespace Chickensoft.Serialization.Godot.Tests;
 
-using Chickensoft.GoDotTest;
 using System.Text.Json;
+using Chickensoft.GoDotTest;
 using global::Godot;
 using Shouldly;
 
-public class Transform2DConverterTest : TestClass {
+public class Transform2DConverterTest : TestClass
+{
   public Transform2DConverterTest(Node testScene) : base(testScene) { }
 
   [Test]
-  public void CanConvert() {
+  public void CanConvert()
+  {
     var converter = new Transform2DConverter();
     converter.CanConvert(typeof(Transform2D)).ShouldBeTrue();
   }
 
   [Test]
-  public void Converts() {
+  public void Converts()
+  {
     GodotSerialization.Setup();
 
-    var options = new JsonSerializerOptions() {
+    var options = new JsonSerializerOptions()
+    {
       WriteIndented = true,
       TypeInfoResolver = new SerializableTypeResolver(),
     };

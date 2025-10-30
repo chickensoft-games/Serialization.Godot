@@ -6,7 +6,8 @@ using System.Text.Json.Serialization;
 using global::Godot;
 
 /// <summary>Rect2 JSON converter.</summary>
-public class Rect2Converter : JsonConverter<Rect2> {
+public class Rect2Converter : JsonConverter<Rect2>
+{
   /// <inheritdoc />
   public override bool CanConvert(Type typeToConvert) =>
     typeToConvert == typeof(Rect2);
@@ -16,23 +17,28 @@ public class Rect2Converter : JsonConverter<Rect2> {
     ref Utf8JsonReader reader,
     Type typeToConvert,
     JsonSerializerOptions options
-  ) {
+  )
+  {
     var position = Vector2.Zero;
     var size = Vector2.Zero;
 
-    while (reader.Read()) {
-      if (reader.TokenType == JsonTokenType.EndObject) {
+    while (reader.Read())
+    {
+      if (reader.TokenType == JsonTokenType.EndObject)
+      {
         return new Rect2(position, size);
       }
 
-      if (reader.TokenType != JsonTokenType.PropertyName) {
+      if (reader.TokenType != JsonTokenType.PropertyName)
+      {
         continue;
       }
 
       var propertyName = reader.GetString();
       reader.Read();
 
-      switch (propertyName) {
+      switch (propertyName)
+      {
         case "position":
           position = JsonSerializer.Deserialize<Vector2>(ref reader, options);
           break;
@@ -52,7 +58,8 @@ public class Rect2Converter : JsonConverter<Rect2> {
     Utf8JsonWriter writer,
     Rect2 value,
     JsonSerializerOptions options
-  ) {
+  )
+  {
     var resolver = options.TypeInfoResolver;
     var vectorTypeInfo = resolver!.GetTypeInfo(typeof(Vector2), options)!;
 
