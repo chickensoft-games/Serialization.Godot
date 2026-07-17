@@ -7,12 +7,16 @@ Godot-specific JSON converters for [Chickensoft.Serialization].
 Please contribute! This only supports the following types:
 
 - ✅ `Vector2`
-- ✅ `Vector2i`
+- ✅ `Vector2I`
+- ✅ `Rect2`
+- ✅ `Rect2I`
 - ✅ `Transform2D`
 - ✅ `Vector3`
-- ✅ `Vector3i`
+- ✅ `Vector3I`
 - ✅ `Basis`
 - ✅ `Transform3D`
+- ✅ `Vector4`
+- ✅ `Vector4I`
 - ✅ `Color`
 
 Be sure to place the following line somewhere before you start serializing/deserializing:
