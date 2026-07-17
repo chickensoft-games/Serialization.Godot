@@ -19,6 +19,7 @@ Please contribute! This only supports the following types:
 - ✅ `Vector4I`
 - ✅ `Quaternion`
 - ✅ `Color`
+- ✅ `Aabb (AABB)`
 - ✅ `Plane`
 - ✅ `Projection`
 
