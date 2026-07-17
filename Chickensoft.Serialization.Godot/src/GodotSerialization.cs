@@ -26,5 +26,6 @@ public static class GodotSerialization
     Serializer.AddConverter(new Vector4IConverter());
     Serializer.AddConverter(new QuaternionConverter());
     Serializer.AddConverter(new ColorConverter());
+    Serializer.AddConverter(new ProjectionConverter());
   }
 }
