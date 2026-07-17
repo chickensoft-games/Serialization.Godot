@@ -17,6 +17,7 @@ Please contribute! This only supports the following types:
 - ✅ `Transform3D`
 - ✅ `Vector4`
 - ✅ `Vector4I`
+- ✅ `Quaternion`
 - ✅ `Color`
 
 Be sure to place the following line somewhere before you start serializing/deserializing:
