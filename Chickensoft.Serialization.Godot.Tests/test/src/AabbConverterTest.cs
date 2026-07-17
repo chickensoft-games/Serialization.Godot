@@ -49,7 +49,7 @@ public class AabbConverterTest : TestClass
         }
       }
       """
-    );
+      , StringCompareShould.IgnoreLineEndings);
 
     var deserialized = JsonSerializer.Deserialize<Aabb>(json, options);
 

@@ -65,7 +65,7 @@ public class ProjectionConverterTest : TestClass
         }
       }
       """
-    );
+      , StringCompareShould.IgnoreLineEndings);
 
     var deserialized = JsonSerializer.Deserialize<Projection>(json, options);
 

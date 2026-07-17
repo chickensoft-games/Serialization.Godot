@@ -45,7 +45,7 @@ public class PlaneConverterTest : TestClass
         "d": 7
       }
       """
-    );
+      , StringCompareShould.IgnoreLineEndings);
 
     var deserialized = JsonSerializer.Deserialize<Plane>(json, options);
 

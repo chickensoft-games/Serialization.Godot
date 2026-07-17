@@ -48,7 +48,7 @@ public class Rect2ConverterTest : TestClass
         }
       }
       """
-    );
+      , StringCompareShould.IgnoreLineEndings);
 
     var deserialized = JsonSerializer.Deserialize<Rect2>(json, options);
 

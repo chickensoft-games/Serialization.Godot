@@ -39,7 +39,7 @@ public class Vector3IConverterTest : TestClass
         "z": 3
       }
       """
-    );
+      , StringCompareShould.IgnoreLineEndings);
 
     var deserialized = JsonSerializer.Deserialize<Vector3I>(json, options);
 

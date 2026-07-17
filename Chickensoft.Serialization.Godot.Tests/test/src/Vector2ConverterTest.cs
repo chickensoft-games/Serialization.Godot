@@ -38,7 +38,7 @@ public class Vector2ConverterTest : TestClass
         "y": 2
       }
       """
-    );
+      , StringCompareShould.IgnoreLineEndings);
 
     var deserialized = JsonSerializer.Deserialize<Vector2>(json, options);
 

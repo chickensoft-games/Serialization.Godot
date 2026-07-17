@@ -40,7 +40,7 @@ public class Vector4ConverterTest : TestClass
         "w": 4
       }
       """
-    );
+      , StringCompareShould.IgnoreLineEndings);
 
     var deserialized = JsonSerializer.Deserialize<Vector4>(json, options);
 

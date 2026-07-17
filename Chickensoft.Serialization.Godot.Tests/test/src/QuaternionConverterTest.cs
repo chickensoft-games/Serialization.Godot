@@ -40,7 +40,7 @@ public class QuaternionConverterTest : TestClass
         "w": 4
       }
       """
-    );
+      , StringCompareShould.IgnoreLineEndings);
 
     var deserialized = JsonSerializer.Deserialize<Quaternion>(json, options);
 
