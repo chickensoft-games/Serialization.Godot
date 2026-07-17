@@ -5,15 +5,15 @@ using Chickensoft.GoDotTest;
 using global::Godot;
 using Shouldly;
 
-public class Rect2IConverterTest : TestClass
+public class AabbConverterTest : TestClass
 {
-  public Rect2IConverterTest(Node testScene) : base(testScene) { }
+  public AabbConverterTest(Node testScene) : base(testScene) { }
 
   [Test]
   public void CanConvert()
   {
-    var converter = new Rect2IConverter();
-    converter.CanConvert(typeof(Rect2I)).ShouldBeTrue();
+    var converter = new AabbConverter();
+    converter.CanConvert(typeof(Aabb)).ShouldBeTrue();
   }
 
   [Test]
@@ -27,11 +27,10 @@ public class Rect2IConverterTest : TestClass
       TypeInfoResolver = new SerializableTypeResolver(),
     };
 
-    var obj = new Rect2I(
-      new Vector2I(1, 2),
-      new Vector2I(3, 4)
+    var obj = new Aabb(
+      new Vector3(1, 2, 3),
+      new Vector3(4, 5, 6)
     );
-
     var json = JsonSerializer.Serialize(obj, options);
 
     json.ShouldBe(
@@ -40,17 +39,19 @@ public class Rect2IConverterTest : TestClass
       {
         "position": {
           "x": 1,
-          "y": 2
+          "y": 2,
+          "z": 3
         },
         "size": {
-          "x": 3,
-          "y": 4
+          "x": 4,
+          "y": 5,
+          "z": 6
         }
       }
       """
       , StringCompareShould.IgnoreLineEndings);
 
-    var deserialized = JsonSerializer.Deserialize<Rect2I>(json, options);
+    var deserialized = JsonSerializer.Deserialize<Aabb>(json, options);
 
     deserialized.ShouldBe(obj);
   }

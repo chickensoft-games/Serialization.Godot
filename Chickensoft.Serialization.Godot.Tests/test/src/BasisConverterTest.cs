@@ -55,7 +55,7 @@ public class BasisConverterTest : TestClass
         }
       }
       """
-    );
+      , StringCompareShould.IgnoreLineEndings);
 
     var deserialized = JsonSerializer.Deserialize<Basis>(json, options);
 

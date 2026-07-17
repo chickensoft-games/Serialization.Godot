@@ -53,7 +53,7 @@ public class Transform2DConverterTest : TestClass
         }
       }
       """
-    );
+      , StringCompareShould.IgnoreLineEndings);
 
     var deserialized = JsonSerializer.Deserialize<Transform2D>(json, options);
 

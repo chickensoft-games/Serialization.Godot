@@ -66,7 +66,7 @@ public class Transform3DConverterTest : TestClass
         }
       }
       """
-    );
+      , StringCompareShould.IgnoreLineEndings);
 
     var deserialized = JsonSerializer.Deserialize<Transform3D>(json, options);
 

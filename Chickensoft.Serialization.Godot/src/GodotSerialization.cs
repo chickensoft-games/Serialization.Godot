@@ -15,13 +15,19 @@ public static class GodotSerialization
   {
     Serializer.AddConverter(new Vector2Converter());
     Serializer.AddConverter(new Vector2IConverter());
+    Serializer.AddConverter(new Rect2Converter());
+    Serializer.AddConverter(new Rect2IConverter());
     Serializer.AddConverter(new Transform2DConverter());
     Serializer.AddConverter(new Vector3Converter());
     Serializer.AddConverter(new Vector3IConverter());
     Serializer.AddConverter(new BasisConverter());
     Serializer.AddConverter(new Transform3DConverter());
+    Serializer.AddConverter(new Vector4Converter());
+    Serializer.AddConverter(new Vector4IConverter());
+    Serializer.AddConverter(new QuaternionConverter());
     Serializer.AddConverter(new ColorConverter());
-    Serializer.AddConverter(new Rect2Converter());
-    Serializer.AddConverter(new Rect2IConverter());
+    Serializer.AddConverter(new AabbConverter());
+    Serializer.AddConverter(new PlaneConverter());
+    Serializer.AddConverter(new ProjectionConverter());
   }
 }
