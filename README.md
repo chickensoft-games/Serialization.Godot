@@ -19,6 +19,7 @@ Please contribute! This only supports the following types:
 - ✅ `Vector4I`
 - ✅ `Quaternion`
 - ✅ `Color`
+- ✅ `Plane`
 - ✅ `Projection`
 
 Be sure to place the following line somewhere before you start serializing/deserializing:
